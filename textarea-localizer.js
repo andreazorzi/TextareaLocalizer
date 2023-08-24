@@ -94,6 +94,10 @@ export default class TextareaLocalizer{
         `;
     }
     
+    #getTextarea(lang){
+        return this.#container.querySelector(`.textarea-localizer-textarea[data-lang="${lang}"]`);
+    }
+    
     #updateDefaultLanguage(lang){
         let element = this.#container.querySelector(`.textarea-localizer-language.default-language`);
         element.querySelector("img").src = this.#languages_icons[lang];
@@ -116,5 +120,27 @@ export default class TextareaLocalizer{
         
         // Update default language
         this.#updateDefaultLanguage(lang);
+        
+        // Update textarea
+        this.#container.querySelector(`.textarea-localizer-textarea:not(.textarea-hidden)`).classList.add("textarea-hidden");
+        getTextarea(lang).classList.remove("textarea-hidden");
+    }
+    
+    getValues(){
+        let values = {};
+        
+        this.getLanguages().forEach(lang => {
+            values[lang] = this.#getTextarea(lang).value;
+        });
+        
+        return values;
+    }
+    
+    getValue(lang){
+        if(!this.getLanguages().includes(lang)){
+            return null;
+        }
+        
+        return this.#getTextarea(lang).value;
     }
 }
