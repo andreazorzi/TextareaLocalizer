@@ -13,7 +13,11 @@ export default class TextareaLocalizer{
     #languages = null;
     #languages_icons = {};
     #options = {
-        languages: ["it", "en", "de"],
+        texts: {
+            "it": "", 
+            "en": "", 
+            "de": ""
+        },
         custom_classes: {
             textarea: "",
         }
@@ -44,7 +48,7 @@ export default class TextareaLocalizer{
         this.#element.style.display = "none";
         
         // Import languages icons
-        for (const lang of this.#options.languages) {
+        for (const lang of this.getLanguages()) {
             this.#languages_icons[lang] = new URL(`./images/icons/${lang}.png`, import.meta.url);
         }
         
@@ -52,7 +56,7 @@ export default class TextareaLocalizer{
         this.#container.insertAdjacentHTML("afterbegin", this.#generateLanguagesSelector());
         this.#languages = this.#container.querySelector(".textarea-localizer-languages");
         
-        for (const lang of this.#options.languages) {
+        for (const lang of this.getLanguages()) {
             this.#container.insertAdjacentHTML("beforeend", this.#generateTextarea(lang));
         }
         
@@ -65,20 +69,20 @@ export default class TextareaLocalizer{
     #generateLanguagesSelector(){
         let selector = `
             <div class="textarea-localizer-language default-language">
-                <img src="${this.#languages_icons[this.#options.languages[0]]}" alt="${this.#options.languages[0]}">
+                <img src="${this.#languages_icons[this.getLanguages()[0]]}" alt="${this.getLanguages()[0]}">
             </div>
         `;
         
-        for (const lang of this.#options.languages) {
+        for (const lang of this.getLanguages()) {
             selector += `
-                <div class="textarea-localizer-language ${lang == this.#options.languages[0] ? "textarea-hidden" : ""}">
+                <div class="textarea-localizer-language ${lang == this.getLanguages()[0] ? "textarea-hidden" : ""}">
                     <img src="${this.#languages_icons[lang]}" alt="${lang}" data-lang="${lang}">
                 </div>
             `;
         }
         
         return `
-            <div class="textarea-localizer-languages" style="--width: ${(this.#options.languages.length * 17 + (this.#options.languages.length - 1) * 10)}px" tabindex="0">
+            <div class="textarea-localizer-languages" style="--width: ${(this.getLanguages().length * 17 + (this.getLanguages().length - 1) * 10)}px" tabindex="0">
                 ${selector}
             </div>
         `;
@@ -86,7 +90,7 @@ export default class TextareaLocalizer{
     
     #generateTextarea(lang){
         return `
-            <textarea class="textarea-localizer-textarea ${this.#options.custom_classes.textarea} ${lang != this.#options.languages[0] ? "textarea-hidden" : ""}" data-lang="${lang}"></textarea>
+            <textarea class="textarea-localizer-textarea ${this.#options.custom_classes.textarea} ${lang != this.getLanguages()[0] ? "textarea-hidden" : ""}" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
         `;
     }
     
@@ -94,6 +98,10 @@ export default class TextareaLocalizer{
         let element = this.#container.querySelector(`.textarea-localizer-language.default-language`);
         element.querySelector("img").src = this.#languages_icons[lang];
         element.querySelector("img").alt = lang;
+    }
+    
+    getLanguages(){
+        return Object.keys(this.#options.texts);
     }
     
     changeLanguage(e){
