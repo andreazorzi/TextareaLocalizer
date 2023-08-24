@@ -13,6 +13,7 @@ export default class TextareaLocalizer{
     #languages = null;
     #languages_icons = {};
     #options = {
+        default_language: null,
         texts: {
             "it": "", 
             "en": "", 
@@ -53,6 +54,7 @@ export default class TextareaLocalizer{
         }
         
         // Add languages
+        this.#options.default_language = this.#options.default_language || this.getLanguages()[0];
         this.#container.insertAdjacentHTML("afterbegin", this.#generateLanguagesSelector());
         this.#languages = this.#container.querySelector(".textarea-localizer-languages");
         
@@ -69,13 +71,13 @@ export default class TextareaLocalizer{
     #generateLanguagesSelector(){
         let selector = `
             <div class="textarea-localizer-language default-language">
-                <img src="${this.#languages_icons[this.getLanguages()[0]]}" alt="${this.getLanguages()[0]}">
+                <img src="${this.#languages_icons[this.#options.default_language]}" alt="${this.#options.default_language}">
             </div>
         `;
         
         for (const lang of this.getLanguages()) {
             selector += `
-                <div class="textarea-localizer-language ${lang == this.getLanguages()[0] ? "textarea-hidden" : ""}">
+                <div class="textarea-localizer-language ${lang == this.#options.default_language ? "textarea-hidden" : ""}">
                     <img src="${this.#languages_icons[lang]}" alt="${lang}" data-lang="${lang}">
                 </div>
             `;
@@ -90,7 +92,7 @@ export default class TextareaLocalizer{
     
     #generateTextarea(lang){
         return `
-            <textarea class="textarea-localizer-textarea ${this.#options.custom_classes.textarea} ${lang != this.getLanguages()[0] ? "textarea-hidden" : ""}" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
+            <textarea class="textarea-localizer-textarea ${this.#options.custom_classes.textarea} ${lang != this.#options.default_language ? "textarea-hidden" : ""}" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
         `;
     }
     
