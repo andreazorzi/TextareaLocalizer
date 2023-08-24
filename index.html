@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>TextareaLocalizer Test</title>
+		<link rel="stylesheet" href="textarea-localizer.css">
+	</head>
+	<body>
+		<textarea id="textarea"></textarea>
+		
+		<script type="module">
+			import TextareaLocalizer from './textarea-localizer.js';
+			
+			window.textarea = new TextareaLocalizer("#textarea");
+		</script>
+	</body>
+</html>
