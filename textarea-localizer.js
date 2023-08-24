@@ -17,7 +17,13 @@ export default class TextareaLocalizer{
         texts: {
             "it": "", 
             "en": "", 
-            "de": ""
+            "de": "",
+            "fr": "",
+            "ru": "",
+            "at": "",
+            "ch": "",
+            "es": "",
+            "ie": "",
         },
         custom_classes: {
             textarea: "",
@@ -144,5 +150,9 @@ export default class TextareaLocalizer{
         }
         
         return this.#getTextarea(lang).value;
+    }
+    
+    static getAllLanguages(){
+        return (new TextareaLocalizer()).getLanguages()
     }
 }
