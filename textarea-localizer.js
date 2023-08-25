@@ -131,7 +131,7 @@ export default class TextareaLocalizer{
         
         // Update textarea
         this.#container.querySelector(`.textarea-localizer-textarea:not(.textarea-hidden)`).classList.add("textarea-hidden");
-        getTextarea(lang).classList.remove("textarea-hidden");
+        this.#getTextarea(lang).classList.remove("textarea-hidden");
     }
     
     getValues(){
