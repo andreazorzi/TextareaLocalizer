@@ -1,7 +1,7 @@
 {
   "name": "textarealocalizer",
   "version": "1.0.0",
-  "description": "Add textarea and text input localizzation",
+  "description": "Transform your simple textarea into a localizable one",
   "main": "textarea-localizer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
