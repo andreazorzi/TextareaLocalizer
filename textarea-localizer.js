@@ -98,7 +98,7 @@ export default class TextareaLocalizer{
     
     #generateTextarea(lang){
         return `
-            <textarea class="textarea-localizer-textarea ${this.#options.custom_classes.textarea} ${lang != this.#options.default_language ? "textarea-hidden" : ""}" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
+            <textarea name="${this.#element.name == "" ? "textarea" : this.#element.name}[${lang}]" class="textarea-localizer-textarea ${this.#options.custom_classes.textarea} ${lang != this.#options.default_language ? "textarea-hidden" : ""}" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
         `;
     }
     
