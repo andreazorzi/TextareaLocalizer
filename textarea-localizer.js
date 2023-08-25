@@ -25,6 +25,7 @@ export default class TextareaLocalizer{
             "es": "",
             "ie": "",
         },
+        languages_icons: {},
         custom_classes: {
             textarea: "",
         }
@@ -56,7 +57,7 @@ export default class TextareaLocalizer{
         
         // Import languages icons
         for (const lang of this.getLanguages()) {
-            this.#languages_icons[lang] = new URL(`./images/icons/${lang}.png`, import.meta.url);
+            this.#languages_icons[lang] = this.#options.languages_icons[lang] ?? new URL(`./images/icons/${lang}.png`, import.meta.url);
         }
         
         // Add languages

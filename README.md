@@ -48,6 +48,9 @@ window.TextareaLocalizer = TextareaLocalizer;
         "es": "",
         "ie": "",
     },
+    languages_icons: {
+        "it": "path/to/asset.png"
+    },
     custom_classes: { // Set the custom classes for each elements
         textarea: "",
     }
