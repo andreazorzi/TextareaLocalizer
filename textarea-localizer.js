@@ -70,7 +70,7 @@ export default class TextareaLocalizer{
         
         // Add event listeners
         this.#languages.querySelectorAll('.textarea-localizer-language:not(.default-language) img').forEach(item => {
-			item.addEventListener('click', this.changeLanguage.bind(this));
+			item.addEventListener('click', this.#changeLanguageEvent.bind(this));
 		})
     }
     
@@ -112,19 +112,19 @@ export default class TextareaLocalizer{
         element.querySelector("img").alt = lang;
     }
     
-    getLanguages(){
-        return Object.keys(this.#options.texts);
-    }
-    
-    changeLanguage(e){
+    #changeLanguageEvent(e){
         // Get selected language
         let lang = e.target.dataset.lang;
         
+        this.changeLanguage(lang);
+    }
+    
+    changeLanguage(lang){
         // Show hidden language
         this.#languages.querySelector(`.textarea-localizer-language.textarea-hidden`).classList.remove("textarea-hidden");
         
         // Hide selected language
-        e.target.parentElement.classList.add("textarea-hidden");
+        this.#languages.querySelector(`.textarea-localizer-language img[data-lang="${lang}"]`).parentElement.classList.add("textarea-hidden");
         
         // Update default language
         this.#updateDefaultLanguage(lang);
@@ -132,6 +132,10 @@ export default class TextareaLocalizer{
         // Update textarea
         this.#container.querySelector(`.textarea-localizer-textarea:not(.textarea-hidden)`).classList.add("textarea-hidden");
         this.#getTextarea(lang).classList.remove("textarea-hidden");
+    }
+    
+    getLanguages(){
+        return Object.keys(this.#options.texts);
     }
     
     getValues(){
