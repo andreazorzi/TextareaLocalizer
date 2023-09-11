@@ -14,6 +14,7 @@ export default class TextareaLocalizer{
     #languages_icons = {};
     #options = {
         default_language: null,
+        height: 230,
         texts: {
             "it": "", 
             "en": "", 
@@ -91,15 +92,17 @@ export default class TextareaLocalizer{
         }
         
         return `
-            <div class="textarea-localizer-languages" style="--width: ${(this.getLanguages().length * 17 + (this.getLanguages().length - 1) * 10)}px" tabindex="0">
-                ${selector}
+            <div class="textarea-localizer-header">
+                <div class="textarea-localizer-languages" style="--width: ${(this.getLanguages().length * 17 + (this.getLanguages().length - 1) * 10)}px" tabindex="0">
+                    ${selector}
+                </div>
             </div>
         `;
     }
     
     #generateTextarea(lang){
         return `
-            <textarea name="${this.#element.name == "" ? "textarea" : this.#element.name}[${lang}]" class="textarea-localizer-textarea ${this.#options.custom_classes.textarea} ${lang != this.#options.default_language ? "textarea-hidden" : ""}" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
+            <textarea name="${this.#element.name == "" ? "textarea" : this.#element.name}[${lang}]" class="textarea-localizer-textarea ${this.#options.custom_classes.textarea} ${lang != this.#options.default_language ? "textarea-hidden" : ""}" style="height: ${this.#options.height}px" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
         `;
     }
     
