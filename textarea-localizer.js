@@ -5,7 +5,7 @@
  * Author: Andrea Zorzi <info@zorziandrea.com>
  * License: MIT
  * 
- * Version: 1.0.2
+ * Version: 1.0.3
  */
 export default class TextareaLocalizer{
     #element = null;
