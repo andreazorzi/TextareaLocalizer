@@ -2,7 +2,9 @@
     position: relative;
     
     & .textarea-localizer-header{
-        position: absolute;
+        /* position: absolute; */
+        display: flex;
+        justify-content: flex-end;
         top: 0px;
         left: 0px;
         width: 100%;
@@ -13,8 +15,7 @@
     }
     
     & .textarea-localizer-languages{
-        /* position: absolute; */
-        float: right;
+        /* float: right; */
         display: flex;
         gap: 10px;
         width: 17px;
@@ -42,7 +43,6 @@
     &  .textarea-localizer-textarea{
         width: 100%;
         padding: 7px;
-        padding-top: 30px;
         box-sizing: border-box;
         resize: none;
     }

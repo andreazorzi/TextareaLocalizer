@@ -102,7 +102,9 @@ export default class TextareaLocalizer{
     
     #generateTextarea(lang){
         return `
-            <textarea name="${this.#element.name == "" ? "textarea" : this.#element.name}[${lang}]" class="textarea-localizer-textarea ${this.#options.custom_classes.textarea} ${lang != this.#options.default_language ? "textarea-hidden" : ""}" style="height: ${this.#options.height}px" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
+            <div class="language-box ${lang != this.#options.default_language ? "textarea-hidden" : ""}" data-lang="${lang}">
+                <textarea name="${this.#element.name == "" ? "textarea" : this.#element.name}[${lang}]" class="textarea-localizer-textarea ${this.#options.custom_classes.textarea}" style="height: ${this.#options.height}px" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
+            </div>
         `;
     }
     
@@ -134,8 +136,8 @@ export default class TextareaLocalizer{
         this.#updateDefaultLanguage(lang);
         
         // Update textarea
-        this.#container.querySelector(`.textarea-localizer-textarea:not(.textarea-hidden)`).classList.add("textarea-hidden");
-        this.#getTextarea(lang).classList.remove("textarea-hidden");
+        this.#container.querySelector(`.language-box:not(.textarea-hidden)`).classList.add("textarea-hidden");
+        this.#container.querySelector(`.language-box[data-lang="${lang}"]`).classList.remove("textarea-hidden");
     }
     
     getLanguages(){
