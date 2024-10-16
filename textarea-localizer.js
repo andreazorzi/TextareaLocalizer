@@ -58,7 +58,7 @@ export default class TextareaLocalizer{
         
         // Import languages icons
         for (const lang of this.getLanguages()) {
-            this.#languages_icons[lang] = this.#options.languages_icons[lang] ?? new URL(`./images/icons/${lang}.png`, import.meta.url);
+            this.#languages_icons[lang] = this.#options.languages_icons[lang] ?? `https://raw.githubusercontent.com/andreazorzi/TextareaLocalizer/refs/heads/master/images/icons/${lang}.png`;
         }
         
         // Add languages
