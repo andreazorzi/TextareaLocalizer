@@ -1,5 +1,7 @@
 .textarea-localizer{
     position: relative;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0.375rem;
     
     & .textarea-localizer-header{
         /* position: absolute; */
@@ -8,26 +10,20 @@
         top: 0px;
         left: 0px;
         width: 100%;
-        background-color: #2e80d5;
+        background-color: rgba(0,0,0,.03);
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
         padding: 5px;
         text-align: right;
         box-sizing: border-box;
     }
     
     & .textarea-localizer-languages{
-        /* float: right; */
         display: flex;
         gap: 10px;
-        width: 17px;
-        overflow: hidden;
-        transition: width 0.3s;
-        -webkit-transition: width 0.3s;
-        -moz-transition: width 0.3s;
-        -o-transition: width 0.3s;
-        
-        &:focus, &:hover{
-            width: var(--width);
-        }
+        transition: filter 0.3s;
+        -webkit-transition: filter 0.3s;
+        -moz-transition: filter 0.3s;
+        -o-transition: filter 0.3s;
         
         & .textarea-localizer-language{
             height: 17px;
@@ -45,9 +41,20 @@
         padding: 7px;
         box-sizing: border-box;
         resize: none;
+        border: none;
+        outline: none;
+        line-height: 1.45;
     }
     
-    & .textarea-hidden{
+    & .default-language{
+        display: none;
+    }
+    
+    & .textarea-localizer-language:not(.textarea-hidden, :hover){
+        filter: grayscale(100%) !important;
+    }
+    
+    & .language-box.textarea-hidden{
         display: none;
     }
 }
