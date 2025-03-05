@@ -15,6 +15,7 @@ export default class TextareaLocalizer{
     #options = {
         default_language: null,
         rows: 3,
+        max_rows: 3,
         texts: {
             "it": "", 
             "en": "", 
@@ -73,7 +74,11 @@ export default class TextareaLocalizer{
         // Add event listeners
         this.#languages.querySelectorAll('.textarea-localizer-language:not(.default-language) img').forEach(item => {
 			item.addEventListener('click', this.#changeLanguageEvent.bind(this));
-		})
+		});
+        
+        this.#container.querySelectorAll('.textarea-localizer-textarea').forEach(item => {
+			item.addEventListener('input', this.#updateRows.bind(this));
+		});
     }
     
     #generateLanguagesSelector(){
@@ -101,9 +106,11 @@ export default class TextareaLocalizer{
     }
     
     #generateTextarea(lang){
+        let rows = this.#calculateRows(this.#options.texts[lang].split("\n").length);
+        
         return `
             <div class="language-box ${lang != this.#options.default_language ? "textarea-hidden" : ""}" data-lang="${lang}">
-                <textarea name="${this.#element.name == "" ? "textarea" : this.#element.name}[${lang}]" class="textarea-localizer-textarea ${this.#options.custom_classes.textarea}" rows="${this.#options.rows}" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
+                <textarea name="${this.#element.name == "" ? "textarea" : this.#element.name}[${lang}]" class="textarea-localizer-textarea ${this.#options.custom_classes.textarea}" rows="${rows}" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
             </div>
         `;
     }
@@ -123,6 +130,23 @@ export default class TextareaLocalizer{
         let lang = e.target.dataset.lang;
         
         this.changeLanguage(lang);
+    }
+    
+    #calculateRows(rows){
+        if(rows > this.#options.max_rows){
+            rows = this.#options.max_rows;
+        }
+        else if(rows < this.#options.rows){
+            rows = this.#options.rows;
+        }
+        
+        return rows
+    }
+    
+    #updateRows(e){
+        let rows = this.#calculateRows(e.target.value.split("\n").length);
+        
+        e.target.setAttribute("rows", rows);
     }
     
     changeLanguage(lang){
