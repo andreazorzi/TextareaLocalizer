@@ -186,6 +186,12 @@ export default class TextareaLocalizer{
         return this.#getTextarea(lang).value;
     }
     
+    setValue(lang, value){
+        if(this.getLanguages().includes(lang)){
+            this.#getTextarea(lang).value = value;
+        }
+    }
+    
     static getAllLanguages(){
         return (new TextareaLocalizer()).getLanguages()
     }
