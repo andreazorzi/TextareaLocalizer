@@ -106,7 +106,7 @@ export default class TextareaLocalizer{
     }
     
     #generateTextarea(lang){
-        let rows = this.#calculateRows(this.#options.texts[lang].split("\n").length);
+        let rows = this.#calculateRows(String(this.#options.texts[lang]).split("\n").length);
         
         return `
             <div class="language-box ${lang != this.#options.default_language ? "textarea-hidden" : ""}" data-lang="${lang}">
