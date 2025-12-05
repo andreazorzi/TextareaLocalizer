@@ -1,6 +1,6 @@
 {
   "name": "@andreazorzi/textarealocalizer",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Transform your simple textarea into a localizable one",
   "main": "textarea-localizer.js",
   "scripts": {
