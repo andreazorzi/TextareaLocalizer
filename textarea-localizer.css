@@ -2,6 +2,7 @@
     position: relative;
     border: 1px solid rgba(0, 0, 0, .125);
     border-radius: 0.375rem;
+    overflow: hidden;
     
     & .textarea-localizer-header{
         /* position: absolute; */
