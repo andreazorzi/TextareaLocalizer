@@ -73,12 +73,12 @@ export default class TextareaLocalizer{
         
         // Add event listeners
         this.#languages.querySelectorAll('.textarea-localizer-language:not(.default-language) img').forEach(item => {
-			item.addEventListener('click', this.#changeLanguageEvent.bind(this));
-		});
+            item.addEventListener('click', this.#changeLanguageEvent.bind(this));
+        });
         
         this.#container.querySelectorAll('.textarea-localizer-textarea').forEach(item => {
-			item.addEventListener('input', this.#updateRows.bind(this));
-		});
+            item.addEventListener('input', this.#updateRows.bind(this));
+        });
     }
     
     #generateLanguagesSelector(){
@@ -107,10 +107,12 @@ export default class TextareaLocalizer{
     
     #generateTextarea(lang){
         let rows = this.#calculateRows(String(this.#options.texts[lang]).split("\n").length);
+        let name = this.#element.name == "" ? "textarea" : this.#element.name;
+        let id = (this.#element.getAttribute("id") != null ? this.#element.getAttribute("id") : "textarea")+"-"+lang;
         
         return `
             <div class="language-box ${lang != this.#options.default_language ? "textarea-hidden" : ""}" data-lang="${lang}">
-                <textarea name="${this.#element.name == "" ? "textarea" : this.#element.name}[${lang}]" class="textarea-localizer-textarea ${this.#options.custom_classes.textarea}" rows="${rows}" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
+                <textarea id="${id}" name="${name}[${lang}]" class="textarea-localizer-textarea ${this.#options.custom_classes.textarea}" rows="${rows}" data-lang="${lang}">${this.#options.texts[lang]}</textarea>
             </div>
         `;
     }
